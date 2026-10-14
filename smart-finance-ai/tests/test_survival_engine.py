@@ -2,7 +2,7 @@ import math
 
 import pytest
 
-from survival_engine import calculate_survival_months
+from backend.services.survival_engine import calculate_survival_months
 
 
 # TC-03: Standard survival

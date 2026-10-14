@@ -1,0 +1,21 @@
+[project]
+name = "smart-finance-ai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "AayushAayush2209", email = "aayush09222000@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "pytest>=9.1.1",
+    "uvicorn[standard]>=0.30.0",
+]
+
+[project.scripts]
+smart-finance-ai = "smart_finance_ai:main"
+
+[build-system]
+requires = ["uv_build>=0.12.8,<0.13.0"]
+build-backend = "uv_build"

@@ -24,6 +24,10 @@ htmlcov/
 .DS_Store
 Thumbs.db
 
+# Frontend dependencies and generated production bundle
+frontend/node_modules/
+frontend/dist/
+
 # Local databases (if created later)
 *.db
 *.sqlite

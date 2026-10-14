@@ -1,6 +1,6 @@
 import pytest
 
-from financial_engine import (
+from backend.services.financial_engine import (
     calculate_balance,
     calculate_savings_rate,
     category_totals,

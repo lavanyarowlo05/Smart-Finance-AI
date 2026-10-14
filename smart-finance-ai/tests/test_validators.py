@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from validators import (
+from backend.services.validators import (
     validate_amount,
     validate_category,
     validate_date,

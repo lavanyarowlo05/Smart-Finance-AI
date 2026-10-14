@@ -6,11 +6,7 @@ def calculate_survival_months(
     monthly_essential_expenses: float,
     monthly_benefits: float = 0.0,
 ) -> float:
-    """Months the emergency fund lasts.
-
-    runway = savings / (essential expenses - benefits)
-    Returns float('inf') when benefits cover all essentials.
-    """
+    """Return how many months savings last after benefits offset expenses."""
     if available_savings < 0:
         raise ValueError("Savings cannot be negative.")
     if monthly_essential_expenses <= 0:
@@ -20,5 +16,5 @@ def calculate_survival_months(
 
     net_monthly_burn = monthly_essential_expenses - monthly_benefits
     if net_monthly_burn <= 0:
-        return float("inf")  # cash-flow neutral: reserve is never depleted
+        return float("inf")
     return round(available_savings / net_monthly_burn, 2)

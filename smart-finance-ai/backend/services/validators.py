@@ -1,8 +1,4 @@
-"""Input validation for Smart Finance AI.
-
-All business-rule checks live here so the UI and the database layer
-never receive bad data. Every function raises ValueError on invalid input.
-"""
+"""Input validation for Smart Finance AI transactions."""
 
 from datetime import date, datetime
 
@@ -10,7 +6,7 @@ VALID_TYPES = ("income", "expense")
 
 
 def validate_amount(amount: float) -> float:
-    """Amount must be a real number greater than zero."""
+    """Require an amount to be a finite number greater than zero."""
     if isinstance(amount, bool) or not isinstance(amount, (int, float)):
         raise ValueError("Amount must be a number.")
     if amount != amount or amount in (float("inf"), float("-inf")):
@@ -21,14 +17,14 @@ def validate_amount(amount: float) -> float:
 
 
 def validate_category(category: str | None) -> str:
-    """Category must be a non-empty string (TC-05)."""
+    """Require and trim a non-empty category."""
     if category is None or not isinstance(category, str) or not category.strip():
         raise ValueError("Category is required.")
     return category.strip()
 
 
 def validate_transaction_type(transaction_type: str) -> str:
-    """Type must be 'income' or 'expense' (case-insensitive)."""
+    """Normalize and validate income or expense transaction types."""
     if not isinstance(transaction_type, str):
         raise ValueError("Transaction type must be 'income' or 'expense'.")
     cleaned = transaction_type.strip().lower()
@@ -38,7 +34,7 @@ def validate_transaction_type(transaction_type: str) -> str:
 
 
 def validate_date(value: str | date) -> date:
-    """Accepts a date object or an ISO string (YYYY-MM-DD)."""
+    """Parse a date object or ISO-formatted date string."""
     if isinstance(value, datetime):
         return value.date()
     if isinstance(value, date):
@@ -54,7 +50,7 @@ def validate_date(value: str | date) -> date:
 def validate_transaction(
     transaction_type: str, category: str | None, amount: float, transaction_date: str | date
 ) -> dict:
-    """Validate a full ledger row and return a clean payload."""
+    """Validate and normalize a complete transaction row."""
     return {
         "type": validate_transaction_type(transaction_type),
         "category": validate_category(category),
